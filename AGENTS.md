@@ -33,6 +33,21 @@ public-ready at all times and prefer simple, reviewable changes.
   explicit user confirmation.
 - Explain what a command will do before running it on a device.
 
+## Steam Deck device documentation
+
+- Inspecting the device must be read-only: no `sudo`, no installs, no writes
+  outside the repository, no service changes unless the user explicitly asks.
+- Collect device state with the tracked method
+  `scripts/collect-device-info.sh`, which writes a snapshot to the gitignored
+  `_LLM_WIKI/device/` directory.
+- Device state (installed games, plugins, modifications) is private and must
+  never be committed. Keep the collection *method* tracked, the *results* local.
+- When adding a new kind of device data, update the script and re-run it rather
+  than hand-writing local snapshots.
+- Distinguish system services from user services (`systemctl` vs
+  `systemctl --user`) when reporting status.
+- Re-collect and refresh the local device files when the device changes.
+
 ## Knowledge base
 
 This repository follows Karpathy's LLM Wiki pattern. Read
@@ -46,6 +61,7 @@ _LLM_WIKI/
   raw/       immutable source material; agents read but never modify
     assets/  locally stored images referenced by sources
   wiki/      agent-maintained markdown knowledge base
+  device/    gitignored; private device state from the collection script
 ```
 
 - `_LLM_WIKI/wiki/index.md` catalogs every wiki page with a link and a one-line
