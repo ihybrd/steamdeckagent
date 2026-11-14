@@ -1,0 +1,15 @@
+# _LLM_WIKI
+
+Agent-maintained knowledge base for this project, following the pattern
+described in [`karpathy_llm_wiki.md`](../karpathy_llm_wiki.md).
+
+## Layout
+
+- `raw/` — immutable source material. Agents read from it but never modify it.
+  Add new sources here.
+- `raw/assets/` — locally downloaded images referenced by sources.
+- `wiki/` — markdown knowledge base maintained by the agent. Humans read it.
+- `wiki/index.md` — catalog of every wiki page with a one-line summary.
+- `wiki/log.md` — append-only record of ingests, queries, and lint passes.
+
+See `AGENTS.md` at the repository root for the workflows and conventions.
